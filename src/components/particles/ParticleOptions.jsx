@@ -1,10 +1,11 @@
 const ParticleOptions = {
+  
     "particles": {
       "number": {
-        "value": 133,
+        "value": 140,
         "density": {
           "enable": true,
-          "value_area": 1262.6362266116362
+          "value_area": 1250
         }
       },
       "color": {
@@ -19,11 +20,6 @@ const ParticleOptions = {
         "polygon": {
           "nb_sides": 8
         },
-        "image": {
-          "src": "img/github.svg",
-          "width": 100,
-          "height": 100
-        }
       },
       "opacity": {
         "value": 0.5,
@@ -42,7 +38,7 @@ const ParticleOptions = {
           "enable": false,
           "speed": 21.57842157842158,
           "size_min": 0.1,
-          "sync": false
+          "sync": true
         }
       },
       "line_linked": {
@@ -78,7 +74,7 @@ const ParticleOptions = {
           "enable": true,
           "mode": "push"
         },
-        "resize": true
+        "resize": false
       },
       "modes": {
         "grab": {

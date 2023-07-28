@@ -1,5 +1,7 @@
 .App {
     text-align: center;
+    background: none;
+    
 }
 
 .center {
@@ -14,4 +16,5 @@
     bottom: 0;
     left: 0;
     z-index: -1;
+    background: rgb(158, 0, 0)
 }

@@ -1,8 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Courier New, Courier, monospace";
-    background: rgb(158, 0, 0)}
+    font-family: Courier, CourierNewPS-BoldMT, 'Courier New Bold', 'Courier New Fett', monospace;
+    }
 
 button {
     cursor: pointer;

@@ -9,7 +9,6 @@ import { loadSlim } from "tsparticles-slim";
 import ParticleOptions from './components/Particles/ParticleOptions';
 
 
-
 function App() {
 
   const particlesInit = useCallback(async engine => {
@@ -25,16 +24,23 @@ const particlesLoaded = useCallback(async container => {
   return (
     <>
     <div className='App'>
-       <Navigation />
+      
+      <Particles  id="tsparticles" className='particles' 
+            init={particlesInit}
+            loaded={particlesLoaded}
+            options= {ParticleOptions}/>
+      <Navigation />
       <Logo />
       <Rank />
       <ImageLinkForm />
       {/* {<FaceRecognition />} */}
     </div>
-    <Particles className='particles' id="tsparticles"
-            init={particlesInit}
-            loaded={particlesLoaded}
-            options= {ParticleOptions}/>
+
+  
+
+    
+
+  
      </>
   );
 }
