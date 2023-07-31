@@ -11,8 +11,30 @@ import ParticleOptions from './components/Particles/ParticleOptions';
 
 
 function App() {
-  const [input, setInput] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+
+const [input, setInput] = useState('');
+const [imageUrl, setImageUrl] = useState('');
+const [box ,setBox] = useState({});
+
+const calculateFaceLocation = (data) => {
+
+const clarifaiFace = JSON.parse(data, null, 2).outputs[0].data.regions[0].region_info.bounding_box;  
+const image = document.getElementById("inputimage");
+const width = Number(image.width);
+const height = Number(image.height);
+return {
+    leftCol: clarifaiFace.left_col * width,
+    topRow: clarifaiFace.top_row * height,
+    rightCol: width - (clarifaiFace.right_col * width),
+    bottomRow: height - (clarifaiFace.bottom_row * height),
+  };
+}
+
+const displayFaceBox = (box)=>{
+  console.log(box);
+  setBox(box);
+}
+
 
 const onInputChange = (event) => {
   setInput(event.target.value);
@@ -22,12 +44,11 @@ const onButtonSubmit = () => {
   setImageUrl(input);
   setInput('');
 
-const PAT = 'e87bef42ee8844f79d91c73720573edb';
+const PAT = 'c774f189cd1c40e79058ab0edb0ce4e5';
 const USER_ID = 'qaac6d6bfcd9';       
-const APP_ID = 'c774f189cd1c40e79058ab0edb0ce4e5';
+const APP_ID = 'FaceRecognitionBrain';
 const MODEL_ID = 'face-detection';
 const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';    
-const IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg';
 
 const raw = JSON.stringify({
     "user_app_id": {
@@ -38,7 +59,7 @@ const raw = JSON.stringify({
         {
             "data": {
                 "image": {
-                    "url": IMAGE_URL
+                    "url": input
                 }
             }
         }
@@ -56,16 +77,18 @@ const requestOptions = {
 
 fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-}
+    .then((data) => {
+     displayFaceBox(calculateFaceLocation(data));
+    })
+    .catch((error) => console.log('error', error));
+};
 
-  const particlesInit = useCallback(async engine => {
+  const particlesInit = useCallback(async (engine) => {
     console.log(engine);
     await loadSlim(engine);
 }, []);
 
-const particlesLoaded = useCallback(async container => {
+const particlesLoaded = useCallback(async (container) => {
     await console.log(container);
 }, []);
 
@@ -91,10 +114,10 @@ const particlesLoaded = useCallback(async container => {
       onButtonSubmit={onButtonSubmit}
       input={input}/>
 
-      <FaceRecognition imageUrl={imageUrl}/>
+      <FaceRecognition imageUrl={imageUrl} box={box}/>
     </div>
     </>
   );
-}
+  }
 
 export default App
