@@ -4,6 +4,7 @@ import FaceRecognition from './components/facerecognition/facerecognition'
 import Logo from './components/logo/logo';
 import ImageLinkForm from './components/ImageLinkForm/imagelinkform';
 import Rank from './components/Rank/rank';
+import SignIn from './components/signin/signin';
 import { useCallback, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim"; 
@@ -105,6 +106,7 @@ const particlesLoaded = useCallback(async (container) => {
         />
 
       <Navigation />
+      <SignIn/>
       <Logo />
       <Rank />
 
