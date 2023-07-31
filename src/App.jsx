@@ -16,6 +16,11 @@ function App() {
 const [input, setInput] = useState('');
 const [imageUrl, setImageUrl] = useState('');
 const [box ,setBox] = useState({});
+const [route, setRoute] = useState('signin');
+
+const onRouteChange = (route) => {
+  setRoute(route);
+}
 
 const calculateFaceLocation = (data) => {
 
@@ -83,6 +88,7 @@ fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VE
     .catch((error) => console.log('error', error));
 };
 
+
   const particlesInit = useCallback(async (engine) => {
     console.log(engine);
     await loadSlim(engine);
@@ -105,17 +111,25 @@ const particlesLoaded = useCallback(async (container) => {
         options= {ParticleOptions}
         />
 
-      <Navigation />
-      <SignIn/>
-      <Logo />
-      <Rank />
+      
+     <Navigation onRouteChange={onRouteChange} />
+      {route === 'signin' 
+    ? <SignIn onRouteChange={onRouteChange} />
+    : (
+        <div>
+          <Logo />
+          <Rank />
+          <ImageLinkForm 
+            onInputChange={onInputChange} 
+            onButtonSubmit={onButtonSubmit}
+            input={input}/>
 
-      <ImageLinkForm 
-      onInputChange={onInputChange} 
-      onButtonSubmit={onButtonSubmit}
-      input={input}/>
-
-      <FaceRecognition imageUrl={imageUrl} box={box}/>
+          <FaceRecognition 
+            imageUrl={imageUrl} 
+            box={box}/>
+        </div>
+        )
+      }
     </div>
     </>
   );
