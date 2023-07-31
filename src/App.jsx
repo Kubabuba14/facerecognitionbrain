@@ -14,7 +14,7 @@ function App() {
 
 const [input, setInput] = useState('');
 const [imageUrl, setImageUrl] = useState('');
-const [box ,setBox] = useState('');
+const [box ,setBox] = useState({});
 
 const calculateFaceLocation = (data) => {
 
