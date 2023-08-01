@@ -5,6 +5,7 @@ import Logo from './components/logo/logo';
 import ImageLinkForm from './components/ImageLinkForm/imagelinkform';
 import Rank from './components/Rank/rank';
 import SignIn from './components/signin/signin';
+import Register from './components/register/register';
 import { useCallback, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim"; 
@@ -17,8 +18,15 @@ const [input, setInput] = useState('');
 const [imageUrl, setImageUrl] = useState('');
 const [box ,setBox] = useState({});
 const [route, setRoute] = useState('signin');
+const [isSignedIn, setIsSignedIn] = useState(false);
+
 
 const onRouteChange = (route) => {
+  if(route === 'signout'){
+  setIsSignedIn(false)
+} else if (route === 'home') {
+  setIsSignedIn(true)
+}
   setRoute(route);
 }
 
@@ -112,22 +120,26 @@ const particlesLoaded = useCallback(async (container) => {
         />
 
       
-     <Navigation onRouteChange={onRouteChange} />
-      {route === 'signin' 
-    ? <SignIn onRouteChange={onRouteChange} />
-    : (
-        <div>
+     <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn}/>
+      {route === 'home' 
+      ?   <div>
           <Logo />
           <Rank />
           <ImageLinkForm 
             onInputChange={onInputChange} 
             onButtonSubmit={onButtonSubmit}
-            input={input}/>
+            input={input}
+          />
 
           <FaceRecognition 
             imageUrl={imageUrl} 
             box={box}/>
         </div>
+
+        :(
+          route === 'signin'
+          ? <SignIn onRouteChange={onRouteChange}/>
+          : <Register onRouteChange={onRouteChange} />
         )
       }
     </div>
