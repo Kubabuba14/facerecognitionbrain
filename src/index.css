@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Courier, CourierNewPS-BoldMT, 'Courier New Bold', 'Courier New Fett', monospace;
-    }
+    background: none;
+}
 
 button {
     cursor: pointer;
