@@ -11,7 +11,6 @@ import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim"; 
 import ParticleOptions from './components/Particles/ParticleOptions';
 
-
 function App() {
 
 const [input, setInput] = useState('');
@@ -20,6 +19,16 @@ const [box ,setBox] = useState({});
 const [route, setRoute] = useState('signin');
 const [isSignedIn, setIsSignedIn] = useState(false);
 
+
+ 
+// useEffect(() => {
+//   fetch('http://localhost:3000')
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .catch(error => console.error('Fetch error:', error));
+// }, []);
+// add to react imports
+    
 
 const onRouteChange = (route) => {
   if(route === 'signout'){
@@ -41,8 +50,8 @@ return {
     topRow: clarifaiFace.top_row * height,
     rightCol: width - (clarifaiFace.right_col * width),
     bottomRow: height - (clarifaiFace.bottom_row * height),
-  };
-}
+  }
+};
 
 const displayFaceBox = (box)=>{
   setBox(box);
@@ -91,20 +100,16 @@ const requestOptions = {
 fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.text())
     .then((data) => {
-     displayFaceBox(calculateFaceLocation(data));
+    displayFaceBox(calculateFaceLocation(data));
     })
     .catch((error) => console.log('error', error));
 };
 
-
-  const particlesInit = useCallback(async (engine) => {
-    console.log(engine);
+const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
 }, []);
 
-const particlesLoaded = useCallback(async (container) => {
-    await console.log(container);
-}, []);
+
 
 
   return (
@@ -115,14 +120,13 @@ const particlesLoaded = useCallback(async (container) => {
         id="tsparticles" 
         className='particles' 
         init={particlesInit}
-        loaded={particlesLoaded}
         options= {ParticleOptions}
         />
 
       
      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn}/>
       {route === 'home' 
-      ?   <div>
+      ? <div>
           <Logo />
           <Rank />
           <ImageLinkForm 
@@ -133,7 +137,8 @@ const particlesLoaded = useCallback(async (container) => {
 
           <FaceRecognition 
             imageUrl={imageUrl} 
-            box={box}/>
+            box={box}
+          />
         </div>
 
         :(
