@@ -17,13 +17,17 @@ function SignIn ({ onRouteChange}) {
   const onSubmitSignIn = () => {
     fetch('http://localhost:3000/signin', {
       method: 'post',
-      headers: {'Conent-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         email: signInEmail,
         password: signInPassword
       })
   })
-    onRouteChange('home');
+    .then(response => response.json())
+    .then(data => {
+      if (data === 'success')
+      onRouteChange('home');
+    })
   }
 
   return (
