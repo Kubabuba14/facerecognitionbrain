@@ -18,6 +18,7 @@ const [imageUrl, setImageUrl] = useState('');
 const [box ,setBox] = useState({});
 const [route, setRoute] = useState('signin');
 const [isSignedIn, setIsSignedIn] = useState(false);
+const setNewUser = useState({email: '', id: '', name: '', entries: 0, joined: ''})
 
 
  
@@ -28,6 +29,16 @@ const [isSignedIn, setIsSignedIn] = useState(false);
 //     .catch(error => console.error('Fetch error:', error));
 // }, []);
 // add to react imports
+
+const loadUser = (data) => {
+  setNewUser({
+    email: data.email,
+    id: data.id,
+    name: data.name,
+    entries: data.entries,
+    joined: data.joined
+  });
+};
     
 
 const onRouteChange = (route) => {
@@ -144,7 +155,7 @@ const particlesInit = useCallback(async (engine) => {
         :(
           route === 'signin'
           ? <SignIn onRouteChange={onRouteChange}/>
-          : <Register onRouteChange={onRouteChange} />
+          : <Register loadUser={loadUser} onRouteChange={onRouteChange} />
         )
       }
     </div>

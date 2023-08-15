@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-function SignIn ({ onRouteChange}) {
+const SignIn = ({ onRouteChange}) => {
 
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
@@ -25,8 +25,9 @@ function SignIn ({ onRouteChange}) {
   })
     .then(response => response.json())
     .then(data => {
-      if (data === 'success')
+      if (data === 'success'){
       onRouteChange('home');
+    }
     })
   }
 
