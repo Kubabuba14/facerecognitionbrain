@@ -18,23 +18,21 @@ const [imageUrl, setImageUrl] = useState('');
 const [box ,setBox] = useState({});
 const [route, setRoute] = useState('signin');
 const [isSignedIn, setIsSignedIn] = useState(false);
-const setNewUser = useState({email: '', id: '', name: '', entries: 0, joined: ''})
+const [newUser, setNewUser] = useState({
+                              id: '',
+                              name: '', 
+                              email: '', 
+                              entries: 0, 
+                              joined: ''}
+                              );
 
 
- 
-// useEffect(() => {
-//   fetch('http://localhost:3000')
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-//     .catch(error => console.error('Fetch error:', error));
-// }, []);
-// add to react imports
 
 const loadUser = (data) => {
   setNewUser({
-    email: data.email,
     id: data.id,
     name: data.name,
+    email: data.email,
     entries: data.entries,
     joined: data.joined
   });

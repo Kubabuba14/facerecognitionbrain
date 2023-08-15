@@ -6,7 +6,7 @@ const Register = ({ onRouteChange, loadUser }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [Name, setName] = useState('')
-  var ID = useState('')
+  const [ID, setID] = useState('')
 
 
   const onEmail = (event) => {
@@ -38,7 +38,7 @@ const Register = ({ onRouteChange, loadUser }) => {
   })
     .then(response => response.json())
     .then(user => {
-      if (user) {
+      if (user){
       loadUser(user)  
       onRouteChange('home');
     }
@@ -55,8 +55,8 @@ const Register = ({ onRouteChange, loadUser }) => {
             <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
             <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
             type="text" 
-            name="email-address" 
-            id="email-address" 
+            name="name" 
+            id="name" 
             onChange={ onName }
             />
           </div>
