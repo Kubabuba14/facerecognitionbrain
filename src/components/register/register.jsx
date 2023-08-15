@@ -4,9 +4,9 @@ import { useState } from 'react';
 const Register = ({ onRouteChange, loadUser }) => {
 
   const [Email, setEmail] = useState('');
-  const [setPassword] = useState('');
+  const [Password, setPassword] = useState('');
   const [Name, setName] = useState('')
-  const [ID] = useState('')
+  var ID = useState('')
 
 
   const onEmail = (event) => {
@@ -21,12 +21,15 @@ const Register = ({ onRouteChange, loadUser }) => {
     setName(event.target.value);
   }
 
+
+
   const onSubmitReg = () => {
     fetch('http://localhost:3000/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         email: Email,
+        password: Password,
         id: ID,
         entries: 0,
         name: Name,
