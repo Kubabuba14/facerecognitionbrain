@@ -1,21 +1,22 @@
 import PropTypes from 'prop-types';
 
-const Rank = ({ name, entries }) => {
+const Rank = ({ newUser }) => {
     return (
    <div>
     <div className="white f3">
-    {`${name}, your current rank is ${entries}`}
+    {`${newUser.name}, your current entry count is `}
     </div>
     <div className="white f1">
-        {'#5'}
+        {`#${newUser.entries}`}
     </div>
    </div>
     );
 }
 
 Rank.propTypes = {
+    newUser: PropTypes.shape({
     name: PropTypes.string.isRequired,
     entries: PropTypes.number.isRequired
-  }
-
+}).isRequired
+}
 export default Rank;

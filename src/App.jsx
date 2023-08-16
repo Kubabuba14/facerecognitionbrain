@@ -33,7 +33,7 @@ const loadUser = (data) => {
     id: data.id,
     name: data.name,
     email: data.email,
-    entries: data.entries,
+    entries: Number(data.entries),
     joined: data.joined
   });
 };
@@ -108,8 +108,30 @@ const requestOptions = {
 
 fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.text())
-    .then((data) => {
+    .then(data => {
     displayFaceBox(calculateFaceLocation(data));
+    if (data) {
+      fetch('http://localhost:3000/image', {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: newUser.id
+        })
+      })
+      .then(response => response.json())
+      .then(count => {
+        setNewUser(prevUser => ({
+          ...prevUser,
+          entries: count
+        }));
+        loadUser({
+          ...newUser,
+          entries:count
+        });
+      })
+    
+      .catch(error => console.log('error', error));
+    }
     })
     .catch((error) => console.log('error', error));
 };
@@ -137,7 +159,7 @@ const particlesInit = useCallback(async (engine) => {
       {route === 'home' 
       ? <div>
           <Logo />
-          <Rank />
+          <Rank newUser={newUser}/>
           <ImageLinkForm 
             onInputChange={onInputChange} 
             onButtonSubmit={onButtonSubmit}
@@ -152,7 +174,7 @@ const particlesInit = useCallback(async (engine) => {
 
         :(
           route === 'signin'
-          ? <SignIn onRouteChange={onRouteChange}/>
+          ? <SignIn onRouteChange={onRouteChange} loadUser={loadUser}/>
           : <Register loadUser={loadUser} onRouteChange={onRouteChange} />
         )
       }
