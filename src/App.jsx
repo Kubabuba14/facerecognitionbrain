@@ -130,7 +130,7 @@ fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VE
         });
       })
     
-      .catch(error => console.log('error', error));
+    .catch(error => console.log('error', error));
     }
     })
     .catch((error) => console.log('error', error));
