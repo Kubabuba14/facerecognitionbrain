@@ -12,7 +12,6 @@ import { loadSlim } from "tsparticles-slim";
 import ParticleOptions from './components/Particles/ParticleOptions';
 
 function App() {
-
 const [input, setInput] = useState('');
 const [imageUrl, setImageUrl] = useState('');
 const [box ,setBox] = useState({});
@@ -41,7 +40,9 @@ const loadUser = (data) => {
 
 const onRouteChange = (route) => {
   if(route === 'signout'){
-  setIsSignedIn(false)
+  setIsSignedIn(false);
+  setImageUrl('');
+  setBox({});
 } else if (route === 'home') {
   setIsSignedIn(true)
 }

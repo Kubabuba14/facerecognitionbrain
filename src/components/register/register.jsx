@@ -6,7 +6,7 @@ const Register = ({ onRouteChange, loadUser }) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [Name, setName] = useState('')
-  const [ID, setID] = useState('')
+  const ID = useState('')
 
 
   const onEmail = (event) => {
@@ -38,7 +38,7 @@ const Register = ({ onRouteChange, loadUser }) => {
   })
     .then(response => response.json())
     .then(user => {
-      if (user){
+      if (user.id){
       loadUser(user)  
       onRouteChange('home');
     }
