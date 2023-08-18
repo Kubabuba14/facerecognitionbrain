@@ -9,7 +9,7 @@ import Register from './components/register/register';
 import { useCallback, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim"; 
-import ParticleOptions from './components/Particles/ParticleOptions';
+import ParticleOptions from './components/particles/ParticleOptions';
 
 function App() {
 const [input, setInput] = useState('');
