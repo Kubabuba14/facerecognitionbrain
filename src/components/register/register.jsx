@@ -24,7 +24,7 @@ const Register = ({ onRouteChange, loadUser }) => {
 
 
   const onSubmitReg = () => {
-    fetch('http://localhost:3000/register', {
+    fetch('https://brainserver-zejd.onrender.com/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
