@@ -112,7 +112,7 @@ fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VE
     .then(data => {
     displayFaceBox(calculateFaceLocation(data));
     if (data) {
-      fetch('https://facerecognitionbrain-b0h5.onrender.com/image', {
+      fetch('https://brainserver-zejd.onrender.com/image', {
         method: 'put',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -24,7 +24,7 @@ const Register = ({ onRouteChange, loadUser }) => {
 
 
   const onSubmitReg = () => {
-    fetch('https://facerecognitionbrain-b0h5.onrender.com/register', {
+    fetch('https://brainserver-zejd.onrender.com/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
